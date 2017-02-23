@@ -4,7 +4,7 @@ Raspberry Pi compatible Docker Image with a minimal [Dashing](http://dashing.io/
 
 ## Building the docker image
 
-    $ docker build -t azcoigreach/rpi-dashing .
+    $ docker build -c 0 --tag azcoigreach/rpi-dashing .
 		
 ## Start the container
 

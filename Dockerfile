@@ -2,8 +2,7 @@ FROM hypriot/rpi-ruby:2.2.2
 # Install dependencies
 
 # System packages
-RUN apt-get update
-# RUN apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y build-essential curl python
 
 #Install Supervisord Docker Plugin

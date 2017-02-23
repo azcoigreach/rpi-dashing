@@ -1,13 +1,20 @@
 FROM hypriot/rpi-ruby:2.2.2
-
-#FROM ruby
-#FROM python
-
 # Install dependencies
 
 # System packages
-RUN apt-get update; apt-get -y upgrade
+RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y build-essential curl python
+
+#Install Supervisord Docker Plugin
+RUN apt-get install -y supervisord
+
+# SET ROOT PASSWORD 
+RUN echo 'root:screencast' | chpasswd && \
+  mkdir /var/run/sshd && \
+    sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
+    sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config && \
+    sed -ri 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config && \
+    mkdir /root/.ssh
 
 # Manual installs, e.g. Node.js
 RUN curl -sL https://deb.nodesource.com/setup_5.x | bash -
@@ -19,5 +26,10 @@ COPY ./dashboard/ /usr/src/app
 WORKDIR /usr/src/app
 RUN bundle install
 
-# Default command to start the Dashing project
-CMD ["dashing", "start"]
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+ 
+EXPOSE 22 3030
+
+CMD ["/usr/bin/supervisord"]
+

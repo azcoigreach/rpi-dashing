@@ -2,9 +2,13 @@
 
 Raspberry Pi compatible Docker Image with a minimal [Dashing](http://dashing.io/) sample dashboard. 
 
-## Building the docker image
+## Building the docker image - local
 
     $ docker build -c 0 --tag azcoigreach/rpi-dashing .
+    
+## Building the docker directly from github
+
+    $ docker build -c 0 --tag azcoigreach/rpi-dashing https://github.com/azcoigreach/rpi-dashing.git
 		
 ## Start the container
 

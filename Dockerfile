@@ -8,6 +8,8 @@ RUN apt-get install -y build-essential curl python
 
 #Install Supervisord Docker Plugin
 RUN apt-get install -y supervisor openssh-server
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # SET ROOT PASSWORD 
 RUN echo 'root:screencast' | chpasswd && \

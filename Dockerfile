@@ -3,8 +3,6 @@ FROM hypriot/rpi-ruby:2.2.2
 #FROM ruby
 #FROM python
 
-MAINTAINER Matthias Geisler "matthias@openwebcraft.com"
-
 # Install dependencies
 
 # System packages
